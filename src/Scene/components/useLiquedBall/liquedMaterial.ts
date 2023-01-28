@@ -30,18 +30,19 @@ export const liquedPhysycalMaterial = () => {
                 vec3 newPosition = position;
 
                 float uDisplacementFrequency = 2.;
-                float uDisplacementStrength = .3;
+                float uDisplacementStrength = .2;
 
-                float t = iTime;
+                float t = iTime + (iMouse.x + iMouse.y);
                 float perlingStrength = perlin4d(vec4(position * uDisplacementFrequency, t)) * uDisplacementStrength;
                 newPosition += normal * perlingStrength;
 
-                if ( abs(newPosition.x - iMouse.x) <= INTERSECTION_RADIUS ) {
-                    if (abs(newPosition.y - iMouse.y *-1.) <= INTERSECTION_RADIUS) {
-                        newPosition.x = iMouse.x;
-                        newPosition.y = iMouse.y*-1.;
-                    }
-                }
+                // if ( abs(newPosition.x - iMouse.x) <= INTERSECTION_RADIUS ) {
+                //     if (abs(newPosition.y - iMouse.y) <= INTERSECTION_RADIUS) {
+                //         newPosition.x += iMouse.x - newPosition.x;
+                //         newPosition.y += iMouse.y - newPosition.y;
+                //         newPosition.z = pow(newPosition.x, 2.) + pow(newPosition.y, 2.);
+                //     }
+                // }
 
                 vUv2 = newPosition;\n
         `).replace(`#endif\n}`, `
@@ -82,7 +83,7 @@ export const liquedPhysycalMaterial = () => {
                     p.x
                 );
         `).replace('#include <output_fragment>', `
-            gl_FragColor = vec4( (outgoingLight * 4.) * (col3.xyz + vPerlingStrength), diffuseColor.a );
+            gl_FragColor = vec4(  (vec3(1., 1., 1.) * vPerlingStrength + .1 / 2.), diffuseColor.a );
         `)
         // 
 

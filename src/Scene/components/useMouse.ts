@@ -11,7 +11,7 @@ export const useMouse = () => {
         mouse.y = lerp(mouse.y, y, .1)
 
         scene.x = ((mouse.x - window.innerWidth) / window.innerWidth + .5) * 2
-        scene.y = ((mouse.y - window.innerHeight) / window.innerHeight + .5) * 2
+        scene.y = ((mouse.y - window.innerHeight) / window.innerHeight + .5) * -2
     }
 
     return { screen: mouse, scene, render }
