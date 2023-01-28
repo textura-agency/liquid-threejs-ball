@@ -52,7 +52,7 @@ export const liquedPhysycalMaterial = () => {
             vPerlingStrength = perlingStrength;
         }`)
         // 
-        console.log(shader.vertexShader)
+
         // fragment shader 
         shader.fragmentShader = `
             varying float vPerlingStrength;
